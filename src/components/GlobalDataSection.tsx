@@ -1,5 +1,6 @@
 import { Globe, Database, BarChart3, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
+import map from "../assets/images/map.png";
 
 const GlobalDataSection = () => {
   const stats = [
@@ -70,7 +71,7 @@ const GlobalDataSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
-            src="/map.png"
+            src={map}
             alt="Global Coverage Map"
             height={1200}
             width={1200}

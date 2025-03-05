@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import dashboard from "../assets/images/dashboard.png";
 
 const DashboardSection = () => {
   return (
@@ -14,7 +15,7 @@ const DashboardSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
-            src="/dashboard.png"
+            src={dashboard}
             alt="Financial Dashboard"
             height={1200}
             width={1200}
