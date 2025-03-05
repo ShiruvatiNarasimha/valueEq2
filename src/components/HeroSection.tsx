@@ -161,7 +161,7 @@ const HeroSection = () => {
             whileTap={{ scale: 0.95 }}
             className="px-8 py-4 text-lg font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-full shadow-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 flex items-center"
           >
-            <span>Get Started Free</span>
+            <span>Sign Up Now</span>
             <motion.div
               animate={{ x: [0, 5, 0] }}
               transition={{
