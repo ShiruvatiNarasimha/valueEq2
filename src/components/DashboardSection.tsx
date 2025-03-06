@@ -1,27 +1,47 @@
 import { motion } from "framer-motion";
 import dashboard from "../assets/images/dashboard.png";
+import { Play } from "lucide-react";
 
 const DashboardSection = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <motion.section
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.2 }}
-        className="py-10 bg-muted/30 relative overflow-hidden"
-      >
-        <div className="flex items-center justify-center">
-          <motion.img
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            src={dashboard}
-            alt="Financial Dashboard"
-            height={1200}
-            width={1200}
-          />
-        </div>
-      </motion.section>
+    <div>
+      <div className="flex flex-col items-center space-y-8">
+        <motion.div
+          initial={{ scale: 0.98, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="w-full max-w-6xl relative rounded-2xl overflow-hidden shadow-2xl border"
+        >
+          {/* Browser-style chrome */}
+          <div className="h-12 bg-accent/20 flex items-center px-4 space-x-2 border-b">
+            <div className="h-3 w-3 rounded-full bg-red-500" />
+            <div className="h-3 w-3 rounded-full bg-yellow-500" />
+            <div className="h-3 w-3 rounded-full bg-green-500" />
+          </div>
+
+          {/* Animated dashboard elements */}
+          <div className="relative bg-background">
+            <img
+              src={dashboard}
+              alt="Dashboard preview"
+              className="w-full h-auto object-contain"
+              loading="lazy"
+            />
+
+            {/* Animated overlay elements */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+            >
+              <button className="flex items-center gap-2 text-white bg-primary rounded-full p-6 hover:bg-primary/90 transition-all">
+                <Play className="h-8 w-8" />
+                <span className="text-xl font-semibold">Play Demo</span>
+              </button>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };

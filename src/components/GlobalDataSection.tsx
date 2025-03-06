@@ -1,6 +1,7 @@
 import { Globe, Database, BarChart3, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import map from "../assets/images/map.png";
+import DashboardSection from "./DashboardSection";
 
 const GlobalDataSection = () => {
   const stats = [
@@ -11,13 +12,15 @@ const GlobalDataSection = () => {
 
   return (
     <div className="py-4 bg-gradient-to-b from-indigo-900 to-blue-800  relative overflow-hidden">
+      {/* Dashboard Section with glowing effect */}
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 flex justify-center items-center opacity-20">
         <div className="w-[1000px] h-[1000px]"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <DashboardSection />
+        <div className="text-center mb-16 pt-20">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
