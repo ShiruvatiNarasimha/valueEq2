@@ -101,7 +101,7 @@ const HeroSection = () => {
 
           {/* Watch Demo Button */}
           <motion.a
-            href="#"
+            href="#demo"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="px-8 py-4 text-lg font-medium rounded-full text-blue-300 bg-gray-800/80 backdrop-blur-sm border border-gray-700 hover:bg-gray-700/50 transition-all duration-300 flex items-center gap-2"

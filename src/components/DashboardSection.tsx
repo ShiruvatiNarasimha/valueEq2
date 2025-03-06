@@ -4,7 +4,7 @@ import { Play } from "lucide-react";
 
 const DashboardSection = () => {
   return (
-    <div>
+    <div id="demo">
       <div className="flex flex-col items-center space-y-8">
         <motion.div
           initial={{ scale: 0.98, opacity: 0 }}
