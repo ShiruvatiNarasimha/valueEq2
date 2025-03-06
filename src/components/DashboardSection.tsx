@@ -36,7 +36,7 @@ const DashboardSection = () => {
             >
               <button className="flex items-center gap-2 text-white bg-primary rounded-full p-6 hover:bg-primary/90 transition-all">
                 <Play className="h-8 w-8" />
-                <span className="text-xl font-semibold">Play Demo</span>
+                <span className="text-xl font-semibold">View Demo</span>
               </button>
             </motion.div>
           </div>
