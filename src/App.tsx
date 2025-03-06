@@ -11,6 +11,7 @@ import FinancialsSection from "./components/FinancialsSection";
 import ValuationSection from "./components/ValuationSection";
 import PeerGroupSection from "./components/PeerGroupSection";
 import FAQSection from "./components/Question";
+import CompanyAnalysis from "./components/CompanyAnalysis";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <FinancialsSection />
       <ValuationSection />
       <PeerGroupSection />
+      <CompanyAnalysis />
       <FeatureSection />
       <TestimonialSection />
       <PricingSection />

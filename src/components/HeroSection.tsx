@@ -101,12 +101,12 @@ const HeroSection = () => {
 
           {/* Watch Demo Button */}
           <motion.a
-            href="#demo"
+            href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2wEvo45HdB1DXE6QpsrmElMw0JHpL3vHHgTcv3FH81fXj2-Wk9ER5XjzrcREv-pc-k2ICvcn3d?gv=true"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="px-8 py-4 text-lg font-medium rounded-full text-blue-300 bg-gray-800/80 backdrop-blur-sm border border-gray-700 hover:bg-gray-700/50 transition-all duration-300 flex items-center gap-2"
           >
-            Watch Demo
+            Request a Demo
             <motion.span
               whileHover={{ x: 5 }}
               transition={{ type: "spring", stiffness: 300 }}
