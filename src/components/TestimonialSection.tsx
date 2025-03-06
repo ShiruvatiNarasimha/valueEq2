@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 const testimonials = [
   {
     content:
-      "FinIQ has completely transformed how we approach financial analysis. The AI-powered insights have helped us identify opportunities we would have otherwise missed.",
+      "ValueEq has completely transformed how we approach financial analysis. The AI-powered insights have helped us identify opportunities we would have otherwise missed.",
     author: "Sarah Johnson",
     role: "CFO, TechVentures Inc.",
     image:
@@ -19,7 +19,7 @@ const testimonials = [
   },
   {
     content:
-      "The predictive analytics feature has been a game-changer for our investment strategy. We've seen a 27% increase in portfolio performance since adopting FinIQ.",
+      "The predictive analytics feature has been a game-changer for our investment strategy. We've seen a 27% increase in portfolio performance since adopting ValueEq.",
     author: "Emily Rodriguez",
     role: "Investment Director, Global Assets Management",
     image:
@@ -27,7 +27,7 @@ const testimonials = [
   },
   {
     content:
-      "The risk assessment tools provided by FinIQ have revolutionized our approach to portfolio management. It's like having a crystal ball for market trends.",
+      "The risk assessment tools provided by ValueEq have revolutionized our approach to portfolio management. It's like having a crystal ball for market trends.",
     author: "David Park",
     role: "Risk Manager, Horizon Investments",
     image:
@@ -43,7 +43,7 @@ const testimonials = [
   },
   {
     content:
-      "FinIQ's real-time market analysis has given us a competitive edge. We can now make informed decisions faster than ever before.",
+      "ValueEq's real-time market analysis has given us a competitive edge. We can now make informed decisions faster than ever before.",
     author: "James Wilson",
     role: "Portfolio Manager, Elite Capital",
     image:
