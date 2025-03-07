@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   DollarSign,
   TrendingUp,
@@ -8,12 +8,48 @@ import {
 } from "lucide-react";
 
 const FinancialsSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className="py-24 bg-gradient-to-b from-indigo-900 to-blue-800">
+    <div
+      ref={sectionRef}
+      className="py-24 bg-gradient-to-b from-indigo-900 to-blue-800"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
           {/* Left side - Dashboard visualization */}
-          <div className="relative mb-12 lg:mb-0">
+          <div
+            className={`relative mb-12 lg:mb-0 transform transition-all duration-1000 ${
+              isVisible
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-full opacity-0"
+            }`}
+          >
             <div className="bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:scale-105">
               {/* Dashboard header */}
               <div className="bg-gray-50 border-b border-gray-200 px-6 py-4">
@@ -215,12 +251,18 @@ const FinancialsSection = () => {
             </div>
 
             {/* Decorative elements */}
-            <div className="absolute -top-6 -left-6 w-24 h-24 bg-blue-400 rounded-full opacity-20"></div>
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-indigo-400 rounded-full opacity-20"></div>
+            <div className="absolute -top-6 -right-6 w-24 h-24 bg-blue-400 rounded-full opacity-20"></div>
+            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-indigo-400 rounded-full opacity-20"></div>
           </div>
 
           {/* Right side - Text content */}
-          <div>
+          <div
+            className={`transform transition-all duration-1000 delay-300 ${
+              isVisible
+                ? "translate-x-0 opacity-100"
+                : "translate-x-full opacity-0"
+            }`}
+          >
             <h2 className="text-base font-semibold text-blue-300 tracking-wide uppercase">
               Financial Data
             </h2>

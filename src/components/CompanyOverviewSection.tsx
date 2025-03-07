@@ -5,14 +5,51 @@ import {
   TrendingUp,
   ChevronRight,
 } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
 
 const CompanyOverviewSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.2, // Trigger when 20% of the section is visible
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className="py-24 bg-gradient-to-b from-blue-800 to-indigo-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div
+      ref={sectionRef}
+      className="py-24 bg-gradient-to-b from-blue-800 to-indigo-900 relative overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
           {/* Left side - Text content */}
-          <div className="mb-12 lg:mb-0">
+          <div
+            className={`mb-12 lg:mb-0 transform transition-all duration-1000 ${
+              isVisible
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-full opacity-0"
+            }`}
+          >
             <h2 className="text-base font-semibold text-blue-300 tracking-wide uppercase">
               Company Intelligence
             </h2>
@@ -75,7 +112,13 @@ const CompanyOverviewSection = () => {
           </div>
 
           {/* Right side - Dashboard visualization */}
-          <div className="relative">
+          <div
+            className={`relative transform transition-all duration-1000 delay-300 ${
+              isVisible
+                ? "translate-x-0 opacity-100"
+                : "translate-x-full opacity-0"
+            }`}
+          >
             <div className="bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:scale-105">
               {/* Dashboard header */}
               <div className="bg-gray-50 border-b border-gray-200 px-6 py-4">
