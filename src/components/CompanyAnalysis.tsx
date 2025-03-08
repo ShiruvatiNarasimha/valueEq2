@@ -500,8 +500,7 @@ function CompanyAnalysis() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-teal-400 text-transparent bg-clip-text"
           >
-            Analyze companies with tons of datapoints updated in real times so
-            that you never lack behind
+            Analyze companies with tons of datapoints updated in real times
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
