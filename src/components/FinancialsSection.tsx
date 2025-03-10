@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
 import {
   DollarSign,
+  Globe,
+  BarChart3,
   TrendingUp,
   TrendingDown,
-  BarChart3,
   ChevronRight,
 } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 
 const FinancialsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -35,22 +37,73 @@ const FinancialsSection = () => {
     };
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const tableRowVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
+  const chartVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.8,
+        ease: [0.4, 0, 0.2, 1],
+      },
+    },
+  };
+
   return (
     <div
       ref={sectionRef}
-      className="py-24 bg-gradient-to-b from-indigo-900 to-blue-800"
+      className="py-24 bg-gradient-to-b from-indigo-900 to-blue-800 relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div
+        initial="hidden"
+        animate={isVisible ? "visible" : "hidden"}
+        variants={containerVariants}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+      >
         <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
           {/* Left side - Dashboard visualization */}
-          <div
-            className={`relative mb-12 lg:mb-0 transform transition-all duration-1000 ${
-              isVisible
-                ? "translate-x-0 opacity-100"
-                : "-translate-x-full opacity-0"
-            }`}
+          <motion.div
+            variants={chartVariants}
+            className="relative mb-12 lg:mb-0"
           >
-            <div className="bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:scale-105">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-xl shadow-2xl overflow-hidden"
+            >
               {/* Dashboard header */}
               <div className="bg-gray-50 border-b border-gray-200 px-6 py-4">
                 <div className="flex justify-between items-center">
@@ -60,31 +113,55 @@ const FinancialsSection = () => {
                       Financial Statements
                     </span>
                   </div>
-                  <div className="flex space-x-3">
-                    <div className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
+                  <motion.div
+                    className="flex space-x-3"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded cursor-pointer"
+                    >
                       Annual
-                    </div>
-                    <div className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
+                    </motion.div>
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded cursor-pointer"
+                    >
                       Quarterly
-                    </div>
-                  </div>
+                    </motion.div>
+                  </motion.div>
                 </div>
               </div>
 
               {/* Dashboard content */}
               <div className="p-6">
                 {/* Tabs */}
-                <div className="flex border-b border-gray-200 mb-6">
-                  <button className="px-4 py-2 border-b-2 border-blue-500 text-blue-600 font-medium">
+                <motion.div
+                  variants={itemVariants}
+                  className="flex border-b border-gray-200 mb-6"
+                >
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-2 border-b-2 border-blue-500 text-blue-600 font-medium"
+                  >
                     Income Statement
-                  </button>
-                  <button className="px-4 py-2 text-gray-500 font-medium">
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-2 text-gray-500 font-medium"
+                  >
                     Balance Sheet
-                  </button>
-                  <button className="px-4 py-2 text-gray-500 font-medium">
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-2 text-gray-500 font-medium"
+                  >
                     Cash Flow
-                  </button>
-                </div>
+                  </motion.button>
+                </motion.div>
 
                 {/* Financial data table */}
                 <div className="overflow-x-auto">
@@ -108,7 +185,10 @@ const FinancialsSection = () => {
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <motion.tbody
+                      variants={containerVariants}
+                      className="bg-white divide-y divide-gray-200"
+                    >
                       {[
                         {
                           metric: "Revenue",
@@ -167,11 +247,17 @@ const FinancialsSection = () => {
                           trend: "up",
                         },
                       ].map((row, index) => (
-                        <tr
+                        <motion.tr
                           key={index}
+                          variants={tableRowVariants}
+                          custom={index}
                           className={
                             index % 2 === 0 ? "bg-white" : "bg-gray-50"
                           }
+                          whileHover={{
+                            scale: 1.01,
+                            backgroundColor: "#f8fafc",
+                          }}
                         >
                           <td className="px-3 py-3 text-sm font-medium text-gray-900">
                             {row.metric}
@@ -186,12 +272,13 @@ const FinancialsSection = () => {
                             {row["2024"]}
                           </td>
                           <td className="px-3 py-3 text-sm text-right">
-                            <span
+                            <motion.span
                               className={`inline-flex items-center ${
                                 row.trend === "up"
                                   ? "text-green-600"
                                   : "text-red-600"
                               }`}
+                              whileHover={{ scale: 1.1 }}
                             >
                               {row.trend === "up" ? (
                                 <TrendingUp className="h-3 w-3 mr-1" />
@@ -199,16 +286,19 @@ const FinancialsSection = () => {
                                 <TrendingDown className="h-3 w-3 mr-1" />
                               )}
                               {row.yoy}
-                            </span>
+                            </motion.span>
                           </td>
-                        </tr>
+                        </motion.tr>
                       ))}
-                    </tbody>
+                    </motion.tbody>
                   </table>
                 </div>
 
                 {/* Chart visualization */}
-                <div className="mt-6 h-48 bg-gray-50 rounded-lg p-4">
+                <motion.div
+                  variants={chartVariants}
+                  className="mt-6 h-48 bg-gray-50 rounded-lg p-4"
+                >
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-sm font-medium text-gray-700">
                       Revenue Growth Trend
@@ -220,7 +310,10 @@ const FinancialsSection = () => {
                       <span className="text-xs text-gray-500">Net Income</span>
                     </div>
                   </div>
-                  <div className="h-28 flex items-end space-x-2">
+                  <motion.div
+                    variants={containerVariants}
+                    className="h-28 flex items-end space-x-2"
+                  >
                     {[
                       { revenue: 30, income: 15 },
                       { revenue: 40, income: 20 },
@@ -231,51 +324,88 @@ const FinancialsSection = () => {
                       { revenue: 80, income: 38 },
                       { revenue: 90, income: 42 },
                     ].map((data, i) => (
-                      <div
+                      <motion.div
                         key={i}
                         className="flex-1 flex flex-col items-center space-y-1"
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.1 }}
                       >
-                        <div
+                        <motion.div
                           className="w-full bg-green-500 rounded-t"
                           style={{ height: `${data.income}%` }}
-                        ></div>
-                        <div
+                          initial={{ height: 0 }}
+                          animate={{ height: `${data.income}%` }}
+                          transition={{ duration: 0.8, delay: i * 0.1 }}
+                        />
+                        <motion.div
                           className="w-full bg-blue-500 rounded-t"
                           style={{ height: `${data.revenue - data.income}%` }}
-                        ></div>
-                      </div>
+                          initial={{ height: 0 }}
+                          animate={{ height: `${data.revenue - data.income}%` }}
+                          transition={{ duration: 0.8, delay: i * 0.1 }}
+                        />
+                      </motion.div>
                     ))}
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Decorative elements */}
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-blue-400 rounded-full opacity-20"></div>
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-indigo-400 rounded-full opacity-20"></div>
-          </div>
+            <motion.div
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.2, 0.3, 0.2],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute -top-6 -right-6 w-24 h-24 bg-blue-400 rounded-full opacity-20"
+            />
+            <motion.div
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.2, 0.3, 0.2],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              }}
+              className="absolute -bottom-6 -left-6 w-32 h-32 bg-indigo-400 rounded-full opacity-20"
+            />
+          </motion.div>
 
           {/* Right side - Text content */}
-          <div
-            className={`transform transition-all duration-1000 delay-300 ${
-              isVisible
-                ? "translate-x-0 opacity-100"
-                : "translate-x-full opacity-0"
-            }`}
-          >
-            <h2 className="text-base font-semibold text-blue-300 tracking-wide uppercase">
+          <motion.div variants={containerVariants}>
+            <motion.h2
+              variants={itemVariants}
+              className="text-base font-semibold text-blue-300 tracking-wide uppercase"
+            >
               Financial Data
-            </h2>
-            <p className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
+            </motion.h2>
+            <motion.p
+              variants={itemVariants}
+              className="mt-2 text-3xl font-extrabold text-white sm:text-4xl"
+            >
               Financials
-            </p>
-            <p className="mt-4 text-xl text-blue-200">
+            </motion.p>
+            <motion.p
+              variants={itemVariants}
+              className="mt-4 text-xl text-blue-200"
+            >
               Get access to up to 10 years of historical data for income
               statement, balance sheet and cash flow statement with quarter and
               yearly periods.
-            </p>
+            </motion.p>
 
-            <div className="mt-10 space-y-6">
+            <motion.div
+              variants={containerVariants}
+              className="mt-10 space-y-6"
+            >
               {[
                 {
                   icon: BarChart3,
@@ -296,11 +426,20 @@ const FinancialsSection = () => {
                     "Toggle between quarterly and annual data to analyze seasonal patterns and yearly growth.",
                 },
               ].map((feature, index) => (
-                <div key={index} className="flex items-start">
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className="flex items-start"
+                  whileHover={{ scale: 1.02 }}
+                >
                   <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white"
+                    >
                       <feature.icon className="h-6 w-6" />
-                    </div>
+                    </motion.div>
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-white">
@@ -310,22 +449,24 @@ const FinancialsSection = () => {
                       {feature.description}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
-            <div className="mt-10">
-              <a
+            <motion.div variants={itemVariants} className="mt-10">
+              <motion.a
                 href="#"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-blue-700 bg-white hover:bg-blue-50 transition-all duration-300"
               >
                 Explore financial data
                 <ChevronRight className="ml-2 h-5 w-5" />
-              </a>
-            </div>
-          </div>
+              </motion.a>
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
